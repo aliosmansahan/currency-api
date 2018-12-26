@@ -3,144 +3,85 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\UniqueConstraint;
 
 /**
  * Exchange
  *
- * @ORM\Table(name="exchange", uniqueConstraints={@UniqueConstraint(name="search_idx", columns={"provider", "code"})})
- * @ORM\Entity(repositoryClass="App\Repository\ExchangeRepository")
- * @ORM\HasLifecycleCallbacks()
+ * @ORM\Table(name="exchange")
+ * @ORM\Entity
  */
-class Exchange implements TimestampsInterface
+class Exchange
 {
-    use TimestampsTrait;
-
-    const CURRENCY_SYMBOLS = [
-        'GBPTRY' => '£',
-        'USDTRY' => '$',
-        'EURTRY' => '€',
-    ];
-
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="provider", type="string", length=255)
+     * @ORM\Column(name="provider", type="text", length=65535, nullable=true)
      */
     private $provider;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="code", type="string", length=255)
+     * @ORM\Column(name="code", type="text", length=65535, nullable=true)
      */
     private $code;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="rate", type="decimal", precision=10, scale=4)
+     * @ORM\Column(name="rate", type="text", length=65535, nullable=true)
      */
     private $rate;
 
-
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * Set code
-     *
-     * @param string $code
-     *
-     * @return Exchange
-     */
-    public function setCode($code)
-    {
-        $this->code = $code;
-
-        return $this;
-    }
-
-    /**
-     * Get provider
-     *
-     * @return string
-     */
-    public function getProvider()
+    public function getProvider(): ?string
     {
         return $this->provider;
     }
 
-    /**
-     * Set provider
-     *
-     * @param string $provider
-     *
-     * @return Exchange
-     */
-    public function setProvider($provider)
+    public function setProvider(?string $provider): self
     {
         $this->provider = $provider;
 
         return $this;
     }
 
-    /**
-     * Get code
-     *
-     * @return string
-     */
-    public function getCode()
+    public function getCode(): ?string
     {
         return $this->code;
     }
 
-    /**
-     * Set rate
-     *
-     * @param string $rate
-     *
-     * @return Exchange
-     */
-    public function setRate($rate)
+    public function setCode(?string $code): self
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+    public function getRate(): ?string
+    {
+        return $this->rate;
+    }
+
+    public function setRate(?string $rate): self
     {
         $this->rate = $rate;
 
         return $this;
     }
 
-    /**
-     * Get rate
-     *
-     * @return string
-     */
-    public function getRate()
-    {
-        return $this->rate;
-    }
 
-    /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return (string)$this->id;
-    }
 }
-
