@@ -2,9 +2,9 @@
 
 namespace App\Command;
 
-use AppBundle\Exchange\Adapter\ProviderInterface;
-use AppBundle\Exchange\ExchangeAdapter;
-use AppBundle\Service\ExchangeService;
+use App\Provider\Adapter\ProviderInterface;
+use App\Provider\ExchangeAdapter;
+use App\Service\ExchangeService;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
